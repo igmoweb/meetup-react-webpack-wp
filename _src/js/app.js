@@ -9,6 +9,7 @@ class App extends React.Component {
         super();
         this.state = {
             todos: [],
+            newTodoTitle: '',
             loading: false
         };
     }
@@ -25,6 +26,20 @@ class App extends React.Component {
                 });
                 this.setState( { todos, loading: false } );
             });
+    }
+
+    updateNewTodoTitle( e ) {
+        this.setState( { newTodoTitle: e.target.value } );
+    }
+
+    addNewTodo( e ) {
+        e.preventDefault();
+        if ( this.state.newTodoTitle.length ) {
+            Fetcher.addNewTodo( this.state.newTodoTitle )
+                .then( () => {
+                    this.loadTodos();
+                });
+        }
     }
 
     deleteTodo( todoId ) {
@@ -56,9 +71,15 @@ class App extends React.Component {
             </li>
         });
 
-        return <ul className="todos">
-            { todos }
-        </ul>;
+        return <div>
+            <form onSubmit={ this.addNewTodo.bind( this ) }>
+                <input type="text" defaultValue={ this.state.newTodoTitle } onKeyUp={ this.updateNewTodoTitle.bind( this ) } />
+            </form>
+
+            <ul className="todos">
+                { todos }
+            </ul>
+        </div>
 
     }
 }

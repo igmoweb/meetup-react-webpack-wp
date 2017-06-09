@@ -36,6 +36,21 @@ function MeetupFetcher() {
             };
 
             return request( `${url}/todo/${id}`, params );
+        },
+
+        addNewTodo: ( title ) => {
+            let params = {
+                credentials: 'same-origin',
+                headers: {
+                    'X-WP-Nonce': nonce,
+                    'Content-type': 'application/json'
+                },
+                method: 'post',
+                body: JSON.stringify( { title: title, status: 'publish' } )
+            };
+
+
+            return request( `${url}/todo/`, params );
         }
     };
 }
