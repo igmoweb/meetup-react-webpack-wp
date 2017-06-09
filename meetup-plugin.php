@@ -20,16 +20,8 @@ add_action( 'admin_menu', function() {
 			wp_enqueue_style( 'meetup', $plugin_url . 'css/style.css');
 
 			$init_state = array(
-				'todos' => array(
-					array(
-						'title' => 'Hacer la compra',
-						'id' => 1,
-					),
-					array(
-						'title' => 'Médico a las 11',
-						'id' => 2
-					)
-				)
+				'apiUrl' => esc_url_raw( rest_url( 'wp/v2' ) ),
+				'apiNonce' => wp_create_nonce( 'wp_rest' )
 			);
 
 			wp_localize_script( 'meetup', 'Meetup_Init_State', $init_state );
@@ -82,7 +74,7 @@ add_action( 'init', function() {
 function render_meetup_plugin_menu() {
 	?>
 	<div class="wrap">
-		<div id="app"></div>
+		<div id="app">Loading...</div>
 	</div>
 	<?php
 }
