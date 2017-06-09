@@ -21,9 +21,20 @@ class App extends React.Component {
         }
     }
 
+    deleteTodo( todoId ) {
+        const todos = this.state.todos.filter( ( todo ) => {
+            return ! ( todo.id === todoId );
+        });
+
+        this.setState( { todos } );
+    }
+
     render() {
         const todos = this.state.todos.map( ( todo ) => {
-            return <li key={ todo.id } className="todo-item">{ todo.title }</li>
+            return <li key={ todo.id } className="todo-item">
+                    { todo.title }
+                    <span className="todo-delete" onClick={ this.deleteTodo.bind( this, todo.id ) }>Delete</span>
+            </li>
         });
 
         return <ul className="todos">

@@ -1,6 +1,10 @@
 ul.todos li.todo-item {
   padding: 20px;
   border: 1px solid #CFCFCF;
-  width: 100%; }
+  width: 80%; }
+  ul.todos li.todo-item span.todo-delete {
+    color: red;
+    cursor: pointer;
+    float: right; }
 
 /*# sourceMappingURL=style.css.map*/
