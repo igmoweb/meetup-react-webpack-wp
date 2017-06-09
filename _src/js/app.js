@@ -5,10 +5,29 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 class App extends React.Component {
+    constructor() {
+        super();
+        this.state = {
+            todos: [
+                {
+                    title: 'One todo',
+                    id: 1
+                },
+                {
+                    title: 'Another todo',
+                    id: 2
+                }
+            ]
+        }
+    }
+
     render() {
+        const todos = this.state.todos.map( ( todo ) => {
+            return <li key={ todo.id } className="todo-item">{ todo.title }</li>
+        });
+
         return <ul className="todos">
-            <li className="todo-item">One todo</li>
-            <li className="todo-item">Another todo</li>
+            { todos }
         </ul>;
     }
 }
