@@ -4,6 +4,9 @@ import Fetcher from './Fetcher';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import TodoItem from './components/TodoItem';
+import NewTodoForm from './components/NewTodoForm';
+
 class App extends React.Component {
     constructor() {
         super();
@@ -63,18 +66,20 @@ class App extends React.Component {
             return <div>Loading...</div>
         }
 
-
         const todos = this.state.todos.map( ( todo ) => {
-            return <li key={ todo.id } className="todo-item">
-                { todo.title }
-                <span className="todo-delete" onClick={ this.deleteTodo.bind( this, todo.id ) }>Delete</span>
-            </li>
+            return <TodoItem
+                title={ todo.title }
+                key={ todo.id }
+                onDeleteTodo={ this.deleteTodo.bind( this, todo.id ) }
+            />
         });
 
         return <div>
-            <form onSubmit={ this.addNewTodo.bind( this ) }>
-                <input type="text" defaultValue={ this.state.newTodoTitle } onKeyUp={ this.updateNewTodoTitle.bind( this ) } />
-            </form>
+            <NewTodoForm
+                text={ this.state.newTodoTitle }
+                onKeyUp={ this.updateNewTodoTitle.bind( this ) }
+                onSubmit={ this.addNewTodo.bind( this ) }
+            />
 
             <ul className="todos">
                 { todos }
