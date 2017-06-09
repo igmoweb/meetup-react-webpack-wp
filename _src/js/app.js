@@ -8,17 +8,23 @@ class App extends React.Component {
     constructor() {
         super();
         this.state = {
-            todos: [
-                {
-                    title: 'One todo',
-                    id: 1
-                },
-                {
-                    title: 'Another todo',
-                    id: 2
-                }
-            ]
-        }
+            todos: [],
+            loading: false
+        };
+    }
+
+    loadTodos() {
+        this.setState( { loading: true } );
+        Fetcher.getTodos()
+            .then( ( todos ) => {
+                todos = todos.map( ( todo ) => {
+                    return {
+                        id: todo.id,
+                        title: todo.title.rendered
+                    }
+                });
+                this.setState( { todos, loading: false } );
+            });
     }
 
     deleteTodo( todoId ) {
@@ -29,17 +35,27 @@ class App extends React.Component {
         this.setState( { todos } );
     }
 
+    componentDidMount() {
+        this.loadTodos();
+    }
+
     render() {
+        if ( this.state.loading ) {
+            return <div>Loading...</div>
+        }
+
+
         const todos = this.state.todos.map( ( todo ) => {
             return <li key={ todo.id } className="todo-item">
-                    { todo.title }
-                    <span className="todo-delete" onClick={ this.deleteTodo.bind( this, todo.id ) }>Delete</span>
+                { todo.title }
+                <span className="todo-delete" onClick={ this.deleteTodo.bind( this, todo.id ) }>Delete</span>
             </li>
         });
 
         return <ul className="todos">
             { todos }
         </ul>;
+
     }
 }
 
