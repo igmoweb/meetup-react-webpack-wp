@@ -4,7 +4,7 @@ import Fetcher from './Fetcher';
 import React from 'react';
 import ReactDOM from 'react-dom';
 
-export default class App extends React.Component {
+class App extends React.Component {
     render() {
         return <ul className="todos">
             <li className="todo-item">One todo</li>
