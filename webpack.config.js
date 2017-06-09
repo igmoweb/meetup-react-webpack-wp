@@ -1,10 +1,14 @@
 let path = require('path');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+const extractSass = new ExtractTextPlugin( 'css/style.css' );
+
 
 module.exports = {
     entry: './_src/js/app.js',
     output: {
-        path: path.resolve( __dirname, 'js' ),
-        filename: 'app.js'
+        path: path.resolve( __dirname ),
+        filename: 'js/app.js'
     },
     module: {
         rules: [
@@ -20,9 +24,12 @@ module.exports = {
             },
             {
                 test: /\.scss$/,
-                use: [ 'style-loader', 'css-loader', 'sass-loader' ]
+                loader: extractSass.extract(['css-loader', 'sass-loader'])
             }
         ]
     },
-    devtool: 'cheap-module-source-map'
+    devtool: 'cheap-module-source-map',
+    plugins: [
+        extractSass
+    ]
 };

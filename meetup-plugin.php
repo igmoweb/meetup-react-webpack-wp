@@ -15,7 +15,9 @@ add_action( 'admin_menu', function() {
 	add_action( 'admin_enqueue_scripts', function() use ( $menu_id ) {
 		$screen = get_current_screen();
 		if ( $screen->id === $menu_id ) {
-			wp_enqueue_script( 'meetup', plugin_dir_url( __FILE__ ) . 'js/app.js', array(), '', true );
+			$plugin_url = plugin_dir_url( __FILE__ );
+			wp_enqueue_script( 'meetup', $plugin_url . 'js/app.js', array(), '', true );
+			wp_enqueue_style( 'meetup', $plugin_url . 'css/style.css');
 
 			$init_state = array(
 				'todos' => array(
