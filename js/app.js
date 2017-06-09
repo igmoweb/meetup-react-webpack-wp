@@ -9559,6 +9559,19 @@ function MeetupFetcher() {
                 }
             };
             return request(url + '/todo', params);
+        },
+
+        deleteTodo: function deleteTodo(id) {
+            var params = {
+                credentials: 'same-origin',
+                headers: {
+                    'X-WP-Nonce': nonce,
+                    'Content-type': 'application/json'
+                },
+                method: 'delete'
+            };
+
+            return request(url + '/todo/' + id, params);
         }
     };
 }
@@ -9662,7 +9675,11 @@ var App = function (_React$Component) {
         key: 'deleteTodo',
         value: function deleteTodo(todoId) {
             var todos = this.state.todos.filter(function (todo) {
-                return !(todo.id === todoId);
+                if (todo.id === todoId) {
+                    _Fetcher2.default.deleteTodo(todo.id);
+                    return false;
+                }
+                return true;
             });
 
             this.setState({ todos: todos });

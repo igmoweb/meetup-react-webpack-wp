@@ -29,7 +29,11 @@ class App extends React.Component {
 
     deleteTodo( todoId ) {
         const todos = this.state.todos.filter( ( todo ) => {
-            return ! ( todo.id === todoId );
+            if ( todo.id === todoId ) {
+                Fetcher.deleteTodo( todo.id );
+                return false;
+            }
+            return true;
         });
 
         this.setState( { todos } );

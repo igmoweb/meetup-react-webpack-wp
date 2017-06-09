@@ -23,6 +23,19 @@ function MeetupFetcher() {
                 }
             };
             return request( `${url}/todo`, params );
+        },
+
+        deleteTodo: ( id ) => {
+            let params = {
+                credentials: 'same-origin',
+                headers: {
+                    'X-WP-Nonce': nonce,
+                    'Content-type': 'application/json'
+                },
+                method: 'delete'
+            };
+
+            return request( `${url}/todo/${id}`, params );
         }
     };
 }
