@@ -1,3 +1,12 @@
 export const getTodos = () => {
-    return Meetup_Init_State.todos;
+    return [
+        {
+            id: 1,
+            title: 'Hacer la compra'
+        },
+        {
+            id: 2,
+            title: 'Médico a las 11'
+        }
+    ];
 };
