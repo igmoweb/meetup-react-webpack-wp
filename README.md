@@ -1,12 +1,10 @@
-# React + WordPress + webpack
+# React + webpack + WordPress plugin
 
-Plugin demo para la charla de WordPress Madrid
+Repositorio para la demostración de la charla para [WordPress Madrid](https://www.meetup.com/es-ES/WordPress-Madrid/events/240453080/)
 
-[https://www.meetup.com/es-ES/WordPress-Madrid/events/240453080/](https://www.meetup.com/es-ES/WordPress-Madrid/events/240453080/)
+# Organización
 
-# Branches
-
-Hay una rama para cada paso durante la charla aunuqe ésta es algo más corta. El repositorio incluye también un formulario para crear Todos.
+El repositorio está organizado en varias *branches*:
 
 - `init`: Punto de partida.
 - `01-config-inicial`
@@ -22,3 +20,5 @@ Hay una rama para cada paso durante la charla aunuqe ésta es algo más corta. E
 - `11-react-use-rest-api-to-delete-todos`
 - `12-react-add-todo-form`
 - `13-react-split-components`
+
+Cada *branch* es un paso adelante en la configuración del plugin.

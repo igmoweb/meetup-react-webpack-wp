@@ -1,10 +1,14 @@
 let path = require('path');
+const ExtractTextPlugin = require('extract-text-webpack-plugin');
+
+const extractSass = new ExtractTextPlugin( 'css/style.css' );
+
 
 module.exports = {
-    entry: './_src/app.js',
+    entry: './_src/js/app.js',
     output: {
-        path: path.resolve( __dirname, 'js' ),
-        filename: 'app.js'
+        path: path.resolve( __dirname ),
+        filename: 'js/app.js'
     },
     module: {
         rules: [
@@ -14,10 +18,18 @@ module.exports = {
                 use: {
                     loader: 'babel-loader',
                     options: {
-                        presets: ['es2015']
+                        presets: ['es2015', 'react']
                     }
                 }
+            },
+            {
+                test: /\.scss$/,
+                loader: extractSass.extract(['css-loader', 'sass-loader'])
             }
         ]
     },
+    devtool: 'cheap-module-source-map',
+    plugins: [
+        extractSass
+    ]
 };

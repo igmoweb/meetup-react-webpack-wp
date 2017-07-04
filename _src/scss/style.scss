@@ -1,0 +1,13 @@
+ul.todos {
+  li.todo-item {
+    padding:20px;
+    border:1px solid #CFCFCF;
+    width:80%;
+
+    span.todo-delete {
+      color:red;
+      cursor:pointer;
+      float:right;
+    }
+  }
+}
